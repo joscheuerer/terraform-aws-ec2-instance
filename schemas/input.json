@@ -1,0 +1,443 @@
+{
+    "title": "",
+    "type": "object",
+    "properties": {
+        "create": {
+            "title": "Create",
+            "description": "Whether to create an instance",
+            "type": "boolean",
+            "default": true
+        },
+        "name": {
+            "title": "Name",
+            "description": "Name to be used on EC2 instance created",
+            "type": "string",
+            "default": ""
+        },
+        "ami": {
+            "title": "AMI",
+            "description": "ID of AMI to use for the instance",
+            "type": "string",
+            "default": ""
+        },
+        "associate_public_ip_address": {
+            "title": "Associate Public IP Address",
+            "description": "Whether to associate a public IP address with an instance in a VPC",
+            "type": "boolean",
+            "default": null
+        },
+        "availability_zone": {
+            "title": "Availability Zone",
+            "description": "AZ to start the instance in",
+            "type": "string",
+            "default": null
+        },
+        "capacity_reservation_specification": {
+            "title": "Capacity Reservation Specification",
+            "description": "Describes an instance's Capacity Reservation targeting option",
+            "type": "object",
+            "properties": {
+                "capacity_reservation_preference": {
+                    "title": "Capacity Reservation Preference",
+                    "type": "string",
+                    "description": "Indicates the instance's Capacity Reservation preferences. Can be 'open' or 'none'"
+                },
+                "capacity_reservation_target": {
+                    "title": "Capacity Reservation Target",
+                    "type": "object",
+                    "description": "Information about the target Capacity Reservation.",
+                    "properties": {
+                        "capacity_reservation_id": {
+                            "title": "Capacity Reservation Id",
+                            "description": "The ID of the Capacity Reservation in which to run the instance.",
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "cpu_credits": {
+            "title": "CPU Credits",
+            "description": "The credit option for CPU usage (unlimited or standard)",
+            "type": "string",
+            "default": null
+        },
+        "disable_api_termination": {
+            "title": "Disable API Termination",
+            "description": "If true, enables EC2 Instance Termination Protection",
+            "type": "boolean",
+            "default": null
+        },
+        "ebs_block_device": {
+            "title": "EBS Block Device",
+            "description": "Additional EBS block devices to attach to the instance",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "delete_on_termination": {
+                        "type": "boolean"
+                    },
+                    "device_name": {
+                        "type": "string"
+                    },
+                    "encrypted": {
+                        "type": "boolean"
+                    },
+                    "iops": {
+                        "type": "string"
+                    },
+                    "kms_key_id": {
+                        "type": "string"
+                    },
+                    "snapshot_id": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "throughput": {
+                        "type": "string"
+                    },
+                    "volume_size": {
+                        "type": "string"
+                    },
+                    "volume_type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "default": []
+        },
+        "ebs_optimized": {
+            "title": "EBS Optimized",
+            "description": "If true, the launched EC2 instance will be EBS-optimized",
+            "type": "boolean",
+            "default": null
+        },
+        "enclave_options_enabled": {
+            "title": "Enclave Options Enabled",
+            "description": "Whether Nitro Enclaves will be enabled on the instance. Defaults to `false`",
+            "type": "boolean",
+            "default": null
+        },
+        "ephemeral_block_device": {
+            "title": "Ephemeral Block Device",
+            "description": "Customize Ephemeral (also known as Instance Store) volumes on the instance",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "device_name": {
+                        "type": "string"
+                    },
+                    "no_device": {
+                        "type": "string"
+                    },
+                    "virtual_name": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "get_password_data": {
+            "title": "Get Password Data",
+            "description": "If true, wait for password data to become available and retrieve it.",
+            "type": "boolean",
+            "default": null
+        },
+        "hibernation": {
+            "title": "Hibernation",
+            "description": "If true, the launched EC2 instance will support hibernation",
+            "type": "boolean",
+            "default": null
+        },
+        "host_id": {
+            "title": "Host Id",
+            "description": "ID of a dedicated host that the instance will be assigned to. Use when an instance is to be launched on a specific dedicated host",
+            "type": "string",
+            "default": null
+        },
+        "iam_instance_profile": {
+            "title": "iam Instance Profile",
+            "description": "IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile",
+            "type": "string",
+            "default": null
+        },
+        "instance_initiated_shutdown_behavior": {
+            "title": "Instance Initiated Shutdown Behavior",
+            "description": "Shutdown behavior for the instance. Amazon defaults this to stop for EBS-backed instances and terminate for instance-store instances. Cannot be set on instance-store instance",
+            "type": "string",
+            "default": null
+        },
+        "instance_type": {
+            "title": "Instance Type",
+            "description": "The type of instance to start",
+            "type": "string",
+            "default": "t3.micro"
+        },
+        "ipv6_address_count": {
+            "title": "ipv6 Addresses Count",
+            "description": "A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet",
+            "type": "number",
+            "default": null
+        },
+        "ipv6_addresses": {
+            "title": "ipv6 Addresses",
+            "description": "Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface",
+            "type": "array",
+            "items": {
+                "additionalProperties": {
+                    "type": "string"
+                }
+            },
+            "default": null
+        },
+        "key_name": {
+            "title": "Key Name",
+            "description": "Key name of the Key Pair to use for the instance; which can be managed using the `aws_key_pair` resource",
+            "type": "string",
+            "default": null
+        },
+        "launch_template": {
+            "title": "Launch Template",
+            "description": "Specifies a Launch Template to configure the instance. Parameters configured on this resource will override the corresponding parameters in the Launch Template",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "default": null
+        },
+        "metadata_options": {
+            "title": "Metadata Options",
+            "description": "Customize the metadata options of the instance",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "default": {}
+        },
+        "monitoring": {
+            "title": "Monitoring",
+            "description": "If true, the launched EC2 instance will have detailed monitoring enabled",
+            "type": "boolean",
+            "default": false
+        },
+        "network_interface": {
+            "title": "Network Interface",
+            "description": "Customize network interfaces to be attached at instance boot time",
+            "type": "array",
+            "items": {
+                "additionalProperties": {
+                    "type": "string"
+                }
+            },
+            "default": []
+        },
+        "placement_group": {
+            "title": "Placement Group",
+            "description": "The Placement Group to start the instance in",
+            "type": "string",
+            "default": null
+        },
+        "private_ip": {
+            "title": "Private IP",
+            "description": "Private IP address to associate with the instance in a VPC",
+            "type": "string",
+            "default": null
+        },
+        "root_block_device": {
+            "title": "Root Block Device",
+            "description": "Customize details about the root block device of the instance. See Block Devices below for details",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "delete_on_termination": {
+                        "type": "boolean"
+                    },
+                    "encrypted": {
+                        "type": "boolean"
+                    },
+                    "iops": {
+                        "type": "string"
+                    },
+                    "kms_key_id": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "throughput": {
+                        "type": "string"
+                    },
+                    "volume_size": {
+                        "type": "string"
+                    },
+                    "volume_type": {
+                        "type": "string"
+                    }
+                }
+            },
+            "default": []
+        },
+        "secondary_private_ips": {
+            "title": "Secondary Private Ips",
+            "description": "A list of secondary private IPv4 addresses to assign to the instance's primary network interface (eth0) in a VPC. Can only be assigned to the primary network interface (eth0) attached at instance creation, not a pre-existing network interface i.e. referenced in a `network_interface block`",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "default": null
+        },
+        "source_dest_check": {
+            "title": "Source Dest Check",
+            "description": "Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs.",
+            "type": "boolean",
+            "default": true
+        },
+        "subnet_id": {
+            "title": "Subnet Ids",
+            "description": "The VPC Subnet ID to launch in",
+            "type": "string",
+            "default": null
+        },
+        "tags": {
+            "title": "Tags",
+            "description": "A mapping of tags to assign to the resource",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "default": {}
+        },
+        "tenancy": {
+            "title": "Tenancy",
+            "description": "The tenancy of the instance (if the instance is running in a VPC). Available values: default, dedicated, host.",
+            "type": "string",
+            "default": null
+        },
+        "user_data": {
+            "title": "User Data",
+            "description": "The user data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead.",
+            "type": "string",
+            "default": null
+        },
+        "user_data_base64": {
+            "title": "User Data Base64",
+            "description": "Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption.",
+            "type": "string",
+            "default": null
+        },
+        "volume_tags": {
+            "title": "Volume Tags",
+            "description": "A mapping of tags to assign to the devices created by the instance at launch time",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "default": {}
+        },
+        "enable_volume_tags": {
+            "title": "Enable Volume Tags",
+            "description": "Whether to enable volume tags (if enabled it conflicts with root_block_device tags)",
+            "type": "boolean",
+            "default": true
+        },
+        "vpc_security_group_ids": {
+            "title": "Vpc Security Group Ids",
+            "description": "A list of security group IDs to associate with",
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "default": null
+        },
+        "timeouts": {
+            "title": "Timeouts",
+            "description": "Define maximum timeout for creating, updating, and deleting EC2 instance resources",
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "string",
+                    "description": "(Defaults to 10 mins) Used when launching the instance (until it reaches the initial running state)"
+                },
+                "update": {
+                    "type": "string",
+                    "description": "(Defaults to 10 mins) Used when stopping and starting the instance when necessary during update - e.g., when changing instance type"
+                },
+                "delete": {
+                    "type": "string",
+                    "description": "(Defaults to 20 mins) Used when terminating the instance"
+                }
+            },
+            "default": {}
+        },
+        "cpu_core_count": {
+            "title": "CPU Core Count",
+            "description": "Sets the number of CPU cores for an instance.",
+            "type": "number",
+            "default": null
+        },
+        "cpu_threads_per_core": {
+            "title": "CPU Threads Per Core",
+            "description": "Sets the number of CPU threads per core for an instance (has no effect unless cpu_core_count is also set).",
+            "type": "number",
+            "default": null
+        },
+        "create_spot_instance": {
+            "title": "Create Spot Instance",
+            "description": "Depicts if the instance is a spot instance",
+            "type": "boolean",
+            "default": false
+        },
+        "spot_price": {
+            "title": "Spot Price",
+            "description": "The maximum price to request on the spot market. Defaults to on-demand price",
+            "type": "string",
+            "default": null
+        },
+        "spot_wait_for_fulfillment": {
+            "title": "Spot Wait For Fulfillment",
+            "description": "If set, Terraform will wait for the Spot Request to be fulfilled, and will throw an error if the timeout of 10m is reached",
+            "type": "boolean",
+            "default": null
+        },
+        "spot_type": {
+            "title": "Spot Type",
+            "description": "If set to one-time, after the instance is terminated, the spot request will be closed. Default `persistent`",
+            "type": "string",
+            "default": null
+        },
+        "spot_launch_group": {
+            "title": "Spot Launch Group",
+            "description": "A launch group is a group of spot instances that launch together and terminate together. If left empty instances are launched and terminated individually",
+            "type": "string",
+            "default": null
+        },
+        "spot_block_duration_minutes": {
+            "title": "Spot Block Duration Minutes",
+            "description": "The required duration for the Spot instances, in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360)",
+            "type": "number",
+            "default": null
+        },
+        "spot_instance_interruption_behavior": {
+            "title": "Spot Instance Interruption Behavior",
+            "description": "Indicates Spot instance behavior when it is interrupted. Valid values are `terminate`, `stop`, or `hibernate`",
+            "type": "string",
+            "default": null
+        },
+        "spot_valid_until": {
+            "title": "Spot Valid Until",
+            "description": "The end date and time of the request, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ)",
+            "type": "string",
+            "default": null
+        },
+        "spot_valid_from": {
+            "title": "Spot Valid From",
+            "description": "The start date and time of the request, in UTC RFC3339 format(for example, YYYY-MM-DDTHH:MM:SSZ)",
+            "type": "string",
+            "default": null
+        }
+    }
+}
