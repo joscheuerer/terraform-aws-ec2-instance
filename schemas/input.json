@@ -1,7 +1,15 @@
 {
     "title": "",
     "type": "object",
+    "required": [
+        "ami"
+    ],
     "properties": {
+        "ami": {
+            "title": "AMI",
+            "description": "ID of AMI to use for the instance",
+            "type": "string"
+        },
         "create": {
             "title": "Create",
             "description": "Whether to create an instance",
@@ -11,12 +19,6 @@
         "name": {
             "title": "Name",
             "description": "Name to be used on EC2 instance created",
-            "type": "string",
-            "default": ""
-        },
-        "ami": {
-            "title": "AMI",
-            "description": "ID of AMI to use for the instance",
             "type": "string",
             "default": ""
         },
