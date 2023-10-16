@@ -588,7 +588,6 @@ resource "aws_iam_instance_profile" "this" {
 ################################################################################
 
 resource "aws_ec2_instance_state" "state" {
-count = local.create && !var.ignore_ami_changes && !var.create_spot_instance ? 1 : 0
-  instance_id = aws_instance.this.id
+  instance_id = aws_instance.this.id[count.index]
   state       = var.instance_state
 }
