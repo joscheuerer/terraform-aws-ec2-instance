@@ -7,6 +7,7 @@ variable "instance_state" {
   description = "State of instance"
   type = string
   default = "running" # or "stopped"
+}
 
 variable "name" {
   description = "Name to be used on EC2 instance created"
