@@ -588,6 +588,6 @@ resource "aws_iam_instance_profile" "this" {
 ################################################################################
 
 resource "aws_ec2_instance_state" "state" {
-  instance_id = aws_instance.this[*].id
+  instance_id = "${aws_instance.this.*.id[count.index]}"
   state       = var.instance_state
 }
