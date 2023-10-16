@@ -583,3 +583,11 @@ resource "aws_iam_instance_profile" "this" {
     create_before_destroy = true
   }
 }
+################################################################################
+# Instance state
+################################################################################
+
+resource "aws_ec2_instance_state" "state" {
+  instance_id = aws_instance.this.id
+  state       = var.instance_state
+}
